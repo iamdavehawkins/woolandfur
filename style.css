@@ -1,5 +1,39 @@
 /* Wool & Fur - Experimental UI Discomfort Styles */
 
+/* Jump through time styles */
+.jump-text {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin-left: 10px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 18px;
+    color: #1eff00;
+    transform: rotate(-8deg);
+    text-shadow: 1px 1px 2px #000000;
+    animation: float-jump 3s ease-in-out infinite;
+    letter-spacing: 0.5px;
+    font-style: italic;
+    filter: drop-shadow(0 0 1px rgba(255,255,255,0.5));
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.emoji-arrow {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    margin-left: 40px;
+    font-size: 24px;
+    animation: float-jump 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes float-jump {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(-5deg); }
+}
+
 /* Floating Randomized Drift */
 .float-random {
     position: relative;

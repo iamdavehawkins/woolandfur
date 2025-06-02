@@ -55,9 +55,27 @@
                 <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
             </svg>
         </a>
-        <div class="logo parallax-shallow">
-            <img src="Logo_White-removebg-preview.png" alt="Dave Hawkins Logo">
+        <div class="logo parallax-shallow" style="position: relative;">
+            <a href="#" id="randomSongLink">
+                <img src="Logo_White-removebg-preview.png" alt="Dave Hawkins Logo">
+            </a>
+            <div class="jump-text">jump through time</div>
+            <div class="emoji-arrow">⬅️</div>
         </div>
+        
+        <script>
+            document.getElementById('randomSongLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                const songPages = [
+                    'https://bones.iamdavehawkins.com/',
+                    'https://strawberrysummer.iamdavehawkins.com/',
+                    'https://woolandfur.iamdavehawkins.com/',
+                    'https://santafe.iamdavehawkins.com/'
+                ];
+                const randomPage = songPages[Math.floor(Math.random() * songPages.length)];
+                window.location.href = randomPage;
+            });
+        </script>
         
         <h1 class="floating-text" style="margin-left: 17%;">WOOL & FUR</h1>
         
