@@ -4,553 +4,443 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wool & Fur - Dave Hawkins</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <style>
-        /* CSS Variables for Brand Colors */
-        :root {
-            --color-primary: #9B4A34;     /* Muted terracotta / rust red */
-            --color-secondary: #4F6A89;   /* Washed-out denim blue */
-            --color-accent: #D8A34A;      /* Mustard yellow */
-            --color-paper: #F4F0E6;       /* Off-white paper */
-            --color-charcoal: #222222;    /* Charcoal black */
-        }
-        
-        /* Custom Font Declarations */
-        @font-face {
-            font-family: 'Degular Text';
-            src: url('../fonts/DegularText-Regular.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/DegularText-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Compadre Extended';
-            src: url('../fonts/Compadre-Extended.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Compadre-Extended.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Vulf Mono';
-            src: url('../fonts/Vulf_Mono-Light_Italic_web.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Vulf_Mono-Light_Italic_web.woff2') format('woff2');
-            font-weight: 300;
-            font-style: italic;
-            font-display: swap;
-        }
-        
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Degular Text', Georgia, serif;
-            background-color: var(--color-charcoal);
-            color: var(--color-paper);
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            max-width: 800px;
-        }
-        
-        /* Subtle paper texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(244,240,230,0.02) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, rgba(244,240,230,0.015) 1px, transparent 1px);
-            background-size: 4px 4px, 6px 6px;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        /* Header Styles */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            margin-bottom: 20px;
-        }
-        
-        .logo img {
-            width: 120px;
-            height: auto;
-            filter: grayscale(100%);
-            border: 1px solid var(--color-paper);
-            box-shadow: 0 0 0 2px var(--color-charcoal), 0 0 0 3px var(--color-paper);
-        }
-        
-        h1 {
-            font-family: 'Compadre Extended', Georgia, serif;
-            font-size: 3.2em;
-            font-weight: normal;
-            color: var(--color-paper);
-            margin: 20px 0 10px 0;
-        }
-        
-        .subtitle {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.2em;
-            color: var(--color-secondary);
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Section Styles - zine-like with ink dividers */
-        .section {
-            margin: 40px 0;
-            padding: 20px 0;
-            border-top: 1px solid var(--color-secondary);
-        }
-        
-        .section h2 {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 0.9em;
-            font-weight: normal;
-            color: var(--color-secondary);
-            text-align: left;
-            margin: 0 0 20px 0;
-            text-transform: lowercase;
-        }
-        
-        /* Album Art with Paper Frame */
-        .album-art-container {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .album-art {
-            width: 300px;
-            height: 300px;
-            border-radius: 8px;
-            transform: rotate(-1deg);
-            background: var(--color-paper);
-            padding: 8px;
-            border: 1px solid var(--color-secondary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        .album-art img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-        
-        /* CTA Button Styles */
-        .cta-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-        
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 18px;
-            background-color: var(--color-primary);
-            border: 2px solid var(--color-secondary);
-            color: var(--color-paper);
-            text-decoration: none;
-            font-family: 'Degular Text', Georgia, serif;
-            font-weight: bold;
-            letter-spacing: 1px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-        
-        .cta-button:hover, .cta-button:focus-visible {
-            background-color: var(--color-accent);
-            color: var(--color-charcoal);
-            outline: none;
-        }
-        
-        .cta-button:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        .cta-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-            fill: currentColor;
-        }
-        
-        /* Motion Section */
-        .motion-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .gif-container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .gif-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        
-        /* Shallow Parallax */
-        .parallax-shallow {
-            transition: transform 0.3s ease;
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .parallax-shallow,
-            .floating-element {
-                animation: none !important;
-                transform: none !important;
-            }
-        }
-        
-        /* Video Container */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-        }
-        
-        /* Newsletter Section */
-        .newsletter {
-            background: var(--color-secondary);
-            border: 2px solid var(--color-primary);
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .newsletter h3 {
-            font-family: 'Compadre Extended', Georgia, serif;
-            color: var(--color-paper);
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            letter-spacing: 1px;
-        }
-        
-        .newsletter-form {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .newsletter input[type="email"] {
-            padding: 12px 15px;
-            border: 2px solid var(--color-primary);
-            border-radius: 5px;
-            font-size: 16px;
-            min-width: 250px;
-            font-family: 'Degular Text', Georgia, serif;
-            background: var(--color-paper);
-            color: var(--color-charcoal);
-        }
-        
-        .newsletter input[type="email"]:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 1px;
-        }
-        
-        .newsletter input[type="submit"] {
-            padding: 12px 20px;
-            background: var(--color-primary);
-            color: var(--color-paper);
-            border: 2px solid var(--color-charcoal);
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Degular Text', Georgia, serif;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        
-        .newsletter input[type="submit"]:hover {
-            background: var(--color-accent);
-            color: var(--color-charcoal);
-        }
-        
-        .newsletter input[type="submit"]:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        /* Footer */
-        footer {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.9em;
-            font-weight: 300;
-            font-style: italic;
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px 0;
-            border-top: 1px solid var(--color-secondary);
-            color: var(--color-secondary);
-        }
-        
-        footer a {
-            color: var(--color-accent);
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Floating Elements (Limited) */
-        .floating-element {
-            position: absolute;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-        
-        .floating-element:hover {
-            opacity: 1;
-        }
-        
-        .float-1 {
-            animation: gentle-float-1 12s infinite ease-in-out;
-        }
-        
-        .float-2 {
-            animation: gentle-float-2 15s infinite ease-in-out;
-        }
-        
-        @keyframes gentle-float-1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(10px, -8px); }
-        }
-        
-        @keyframes gentle-float-2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-8px, 12px); }
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2.5em;
-                letter-spacing: 1px;
-            }
-            
-            .album-art {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .cta-row {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cta-button {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .fragments-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .newsletter-form {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .newsletter input[type="email"] {
-                min-width: 100%;
-                box-sizing: border-box;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-            }
-            
-            .album-art {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-        }
-    </style>
-    <script>
-        // Limited shallow parallax effect
-        document.addEventListener('mousemove', function(e) {
-            const parallaxShallow = document.querySelectorAll('.parallax-shallow');
-            
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            parallaxShallow.forEach(element => {
-                const offsetX = (x - 0.5) * -5; // Reduced from -10
-                const offsetY = (y - 0.5) * -5; // Reduced from -10
-                element.style.transform = `translate(${Math.max(-10, Math.min(10, offsetX))}px, ${Math.max(-10, Math.min(10, offsetY))}px)`;
-            });
-        });
-        
-        // Random song navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const randomSongLink = document.getElementById('randomSongLink');
-            if (randomSongLink) {
-                randomSongLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const songPages = [
-                        'https://bones.iamdavehawkins.com/',
-                        'https://strawberrysummer.iamdavehawkins.com/',
-                        'https://santafe.iamdavehawkins.com/',
-                        'https://colorsoftheleaves.iamdavehawkins.com/'
-                    ];
-                    const randomPage = songPages[Math.floor(Math.random() * songPages.length)];
-                    window.location.href = randomPage;
-                });
-            }
-        });
-    </script>
+    <meta name="description" content="Wool & Fur by Dave Hawkins - His coats of wool and fur. Stream the single plus secret B-side Steel & Ash.">
+    <meta name="keywords" content="Wool & Fur, Steel & Ash, Dave Hawkins, indie music, singer-songwriter, folk">
+    <meta name="author" content="Dave Hawkins">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://woolandfur.iamdavehawkins.com/">
+    <meta property="og:title" content="Wool & Fur - Dave Hawkins">
+    <meta property="og:description" content="His coats of wool and fur. Stream the single plus secret B-side Steel & Ash.">
+    <meta property="og:image" content="https://woolandfur.iamdavehawkins.com/album-art.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://woolandfur.iamdavehawkins.com/">
+    <meta property="twitter:title" content="Wool & Fur - Dave Hawkins">
+    <meta property="twitter:description" content="His coats of wool and fur. Stream the single plus secret B-side Steel & Ash.">
+    <meta property="twitter:image" content="https://woolandfur.iamdavehawkins.com/album-art.png">
+    
+    <link rel="canonical" href="https://woolandfur.iamdavehawkins.com/">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="99efd3af-3c2e-490e-adc0-aa7a12c5f68a"></script>
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <!-- Hero Section -->
-    <header>
-        <div class="logo">
-            <a href="#" id="randomSongLink">
-                <img src="Logo_White-removebg-preview.png" alt="Dave Hawkins Logo">
-            </a>
-        </div>
-        <h1>WOOL & FUR</h1>
-        <p class="subtitle">single from Wool & Fur (Steel & Ash)</p>
-        
-        <!-- Album Art with Paper Frame -->
-        <div class="album-art-container">
-            <div class="album-art">
-                <img src="album-art.png" alt="Wool & Fur Album Art">
-            </div>
-        </div>
-        
-        <!-- Single CTA Row -->
-        <div class="cta-row">
-            <a href="https://open.spotify.com/track/28N2IKHLKaOQnnRePZi1LA" class="cta-button" target="_blank" rel="noopener" aria-label="Listen on Spotify">
-                <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                    <path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 30.6 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/>
-                </svg>
-                Spotify
-            </a>
-            <a href="https://music.apple.com/us/album/wool-fur/1793999076" class="cta-button" target="_blank" rel="noopener" aria-label="Listen on Apple Music">
-                <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-                Apple Music
-            </a>
-            <a href="https://music.youtube.com/watch?list=PLOxShTgDdCq6meC-uTonh7_x9l7pAC-Gg" class="cta-button" target="_blank" rel="noopener" aria-label="Listen on YouTube Music">
-                <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                    <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
-                </svg>
-                YouTube Music
-            </a>
-            <a href="https://iamdavehawkins.bandcamp.com/album/wool-fur-steel-ash" class="cta-button" target="_blank" rel="noopener" aria-label="Listen on Bandcamp">
-                <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
-                </svg>
-                Bandcamp
-                <span style="font-family: 'Vulf Mono', monospace; font-size: 0.7em; opacity: 0.8; display: block;">+ b-side</span>
-            </a>
-        </div>
-    </header>
+<body bgcolor="#1a1e1a" text="#e8e4d8" link="#ccaa77" vlink="#998866" alink="#eedd99">
+
+<center>
+
+<table width="100%" cellpadding="10" cellspacing="0" border="0">
+<tr><td bgcolor="#262a24">
+
+<!-- HEADER -->
+<center>
+<font size="1" color="#556644">~ ~ ~</font>
+<br>
+<table cellpadding="5" cellspacing="0" border="1" bordercolor="#445533">
+<tr><td bgcolor="#2a3028" align="center">
+<font size="1" color="#889977">a tale of</font>
+<font size="2" color="#aabb88"><b>SOLITUDE</b></font>
+</td></tr>
+</table>
+</center>
+
+<hr size="1" color="#445533" noshade>
+
+<!-- TITLE -->
+<center>
+<img src="album-art.png" alt="Wool & Fur Album Art" width="140" border="1">
+<br><br>
+<font size="5" color="#f0ece0"><b>WOOL &amp; FUR</b></font>
+<br>
+<font size="2" color="#889977">Dave Hawkins &bull; Denver, CO</font>
+<br><br>
+<marquee behavior="scroll" direction="left" scrollamount="1" width="100%">
+<font size="1" color="#556644"><i>~ his coats of wool and fur ~</i></font>
+</marquee>
+</center>
+
+<hr size="2" width="60%" color="#445533" noshade>
+
+<!-- PLAYER: WOOL & FUR -->
+<fieldset>
+<legend><font size="2" color="#aabb88"><b>&#9658; WOOL &amp; FUR</b></font></legend>
+<br>
+<center>
+<table cellpadding="5" cellspacing="2" border="0">
+<tr>
+<td bgcolor="#3a3e38">
+<button onclick="toggleAudio('audio1', 'nowPlaying1')"><font size="3" color="#f0ece0"><b>&#9658; PLAY</b></font></button>
+</td>
+<td bgcolor="#2a3a2a">
+<a href="Wool & Fur - Master.wav" download><font size="2" color="#ccaa77"><b>&#11015; DOWNLOAD WAV</b></font></a>
+</td>
+</tr>
+</table>
+<br>
+<audio id="audio1" controls>
+    <source src="Wool & Fur - Master.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+</center>
+<br>
+</fieldset>
+
+<!-- NOW PLAYING: WOOL & FUR -->
+<div id="nowPlaying1" hidden>
+<br>
+<table width="100%" cellpadding="8" cellspacing="0" border="1" bordercolor="#445533" bgcolor="#2a3028">
+<tr><td>
+<font size="2" color="#aabb88">
+<b>&#9835; NOW PLAYING:</b> Wool &amp; Fur
+&nbsp;|&nbsp;
+<tt><span id="currentTime1">0:00</span> / <span id="totalTime1">4:30</span></tt>
+</font>
+<br><br>
+<blockquote>
+<font size="3" color="#e8e4d8"><i><span id="lyricsDisplay1">[ lyrics coming... ]</span></i></font>
+</blockquote>
+</td></tr>
+</table>
+</div>
+
+<br>
+
+<!-- SECRET B-SIDE -->
+<table width="100%" cellpadding="8" cellspacing="0" border="2" bordercolor="#554433" bgcolor="#2a2824">
+<tr><td>
+<center>
+<font size="1" color="#776655">&#9734; SECRET B-SIDE &#9734;</font>
+<br>
+<font size="3" color="#ccaa77"><b>STEEL &amp; ASH</b></font>
+</center>
+</td></tr>
+</table>
+
+<fieldset>
+<legend><font size="2" color="#ccaa77"><b>&#9658; STEEL &amp; ASH</b></font></legend>
+<br>
+<center>
+<table cellpadding="5" cellspacing="2" border="0">
+<tr>
+<td bgcolor="#3a3830">
+<button onclick="toggleAudio('audio2', 'nowPlaying2')"><font size="3" color="#f0ece0"><b>&#9658; PLAY</b></font></button>
+</td>
+<td bgcolor="#3a2a2a">
+<a href="Steel & Ash - Master.wav" download><font size="2" color="#ccaa77"><b>&#11015; DOWNLOAD WAV</b></font></a>
+</td>
+</tr>
+</table>
+<br>
+<audio id="audio2" controls>
+    <source src="Steel & Ash - Master.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+</center>
+<br>
+</fieldset>
+
+<!-- NOW PLAYING: STEEL & ASH -->
+<div id="nowPlaying2" hidden>
+<br>
+<table width="100%" cellpadding="8" cellspacing="0" border="1" bordercolor="#554433" bgcolor="#2a2824">
+<tr><td>
+<font size="2" color="#ccaa77">
+<b>&#9835; NOW PLAYING:</b> Steel &amp; Ash
+&nbsp;|&nbsp;
+<tt><span id="currentTime2">0:00</span> / <span id="totalTime2">3:30</span></tt>
+</font>
+<br><br>
+<blockquote>
+<font size="3" color="#e8e4d8"><i><span id="lyricsDisplay2">[ lyrics coming... ]</span></i></font>
+</blockquote>
+</td></tr>
+</table>
+</div>
+
+<br>
+
+<!-- STREAMING -->
+<table width="100%" cellpadding="8" cellspacing="0" border="1" bordercolor="#445533" bgcolor="#283028">
+<tr><td>
+<font size="2" color="#aabb88"><b>&#9733; STREAM EVERYWHERE</b></font>
+<hr size="1" color="#445533">
+<font size="2">
+&#8226; <a href="https://open.spotify.com/track/28N2IKHLKaOQnnRePZi1LA" target="_blank" rel="noopener">Spotify</a>
+&nbsp;&#8226; <a href="https://music.apple.com/us/album/wool-fur/1793999076" target="_blank" rel="noopener">Apple Music</a>
+&nbsp;&#8226; <a href="https://music.youtube.com/watch?list=PLOxShTgDdCq6meC-uTonh7_x9l7pAC-Gg" target="_blank" rel="noopener">YouTube Music</a>
+&nbsp;&#8226; <a href="https://iamdavehawkins.bandcamp.com/album/wool-fur-steel-ash" target="_blank" rel="noopener">Bandcamp</a>
+</font>
+<br>
+<font size="1" color="#778866"><i>(Bandcamp has both tracks)</i></font>
+</td></tr>
+</table>
+
+<br>
+
+<!-- MUSIC VIDEO -->
+<fieldset>
+<legend><font size="2" color="#aabb88"><b>&#127916; MUSIC VIDEO</b></font></legend>
+<br>
+<center>
+<font size="2">&#8594; <a href="https://youtu.be/iN3Lr3CLIcU" target="_blank" rel="noopener">Watch on YouTube</a> &#8592;</font>
+<br><br>
+<iframe width="100%" height="200" src="https://www.youtube.com/embed/iN3Lr3CLIcU" title="Wool & Fur - Music Video" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+<br>
+</fieldset>
+
+<br>
+
+<!-- LYRICS: WOOL & FUR -->
+<fieldset>
+<legend><font size="2" color="#aabb88"><b>&#128214; LYRICS: WOOL &amp; FUR</b></font></legend>
+<blockquote>
+
+<table width="100%" cellpadding="8" cellspacing="0" border="0">
+<tr><td bgcolor="#222820">
+<font size="2" color="#d0ccc0">
+He was an old man, who lived by himself<br>
+in a old cabin, lost to the south<br>
+he had no happiness, no family, no wealth<br>
+he built with his hands and, cared for his health
+</font>
+</td></tr>
+</table>
+
+<br>
+
+<table width="100%" cellpadding="12" cellspacing="0" border="1" bordercolor="#667755" bgcolor="#2a3828">
+<tr><td align="center">
+<font size="3" color="#ccddaa"><i>
+rustling river, sparkling leaves, the sounds that he knew<br>
+whistling birds, howling wind, the chittering wolves<br>
+the fungus grew from things he knew, the cracks of breaking wood,<br>
+his empty flask, his broken ax, his coats of wool and fur
+</i></font>
+</td></tr>
+</table>
+
+<br>
+
+<table width="100%" cellpadding="8" cellspacing="0" border="0">
+<tr><td bgcolor="#222820">
+<font size="2" color="#d0ccc0">
+as the skies darkened, frost grew on earth,<br>
+he knelt at the table, his wick slowly burnt<br>
+he raised both his hands and, curled into fists<br>
+struck at the daylight, the moments that he missed,<br>
+the food that he savored, the people he'd kissed
+</font>
+</td></tr>
+</table>
+
+<br>
+
+<table width="100%" cellpadding="8" cellspacing="0" border="0">
+<tr><td bgcolor="#222820">
+<font size="2" color="#d0ccc0">
+one day he could feel, no more through the pain<br>
+fell onto worn carpet, and started to sing
+</font>
+</td></tr>
+</table>
+
+<br>
+
+<table width="100%" cellpadding="12" cellspacing="0" border="1" bordercolor="#667755" bgcolor="#2a3828">
+<tr><td align="center">
+<font size="3" color="#ccddaa"><i>
+rustling river, sparkling leaves, the sounds he knew<br>
+whistling birds, howling wind, the chittering wolves<br>
+the fungus grew from things he knew, the cracks of breaking wood,<br>
+<b>his empty flask, his broken ax, his coats of wool and fur</b>
+</i></font>
+</td></tr>
+</table>
+
+</blockquote>
+</fieldset>
+
+<br>
+
+<!-- NEWSLETTER -->
+<table width="100%" cellpadding="10" cellspacing="0" border="2" bordercolor="#445533" bgcolor="#2a3028">
+<tr><td>
+<font size="2" color="#aabb88"><b>&#9993; GET UPDATES</b></font>
+<hr size="1" color="#445533">
+<form action="https://buttondown.com/api/emails/embed-subscribe/iamdavehawkins" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/iamdavehawkins', 'popupwindow')">
+    <label for="email"><font size="2" color="#889977">Email:</font></label>
+    <input type="email" name="email" id="email" placeholder="your@email.com" size="25">
+    <input type="submit" value="&#10003; Subscribe">
+    <input type="hidden" value="1" name="embed">
+</form>
+<font size="1" color="#556644"><i>new songs, shows, and field notes</i></font>
+</td></tr>
+</table>
+
+<hr size="2" color="#445533" noshade>
+
+<!-- FOOTER -->
+<center>
+<font size="1" color="#445533">~&nbsp;&nbsp;.&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;.&nbsp;&nbsp;~</font>
+<br><br>
+<font size="1" color="#667755">&copy; 2025 Dave Hawkins</font>
+<br>
+<font size="1"><a href="https://links.iamdavehawkins.com" target="_blank" rel="noopener">iamdavehawkins.com</a></font>
+</center>
+
+<br>
+
+<marquee behavior="alternate" scrollamount="1" width="100%">
+<font size="1" color="#445533">~ ~ ~ wool and fur ~ ~ ~</font>
+</marquee>
+
+</td></tr>
+</table>
+
+</center>
+
+<script>
+const audio1 = document.getElementById('audio1');
+const audio2 = document.getElementById('audio2');
+const nowPlaying1 = document.getElementById('nowPlaying1');
+const nowPlaying2 = document.getElementById('nowPlaying2');
+const lyricsDisplay1 = document.getElementById('lyricsDisplay1');
+const lyricsDisplay2 = document.getElementById('lyricsDisplay2');
+const currentTimeEl1 = document.getElementById('currentTime1');
+const totalTimeEl1 = document.getElementById('totalTime1');
+const currentTimeEl2 = document.getElementById('currentTime2');
+const totalTimeEl2 = document.getElementById('totalTime2');
+let currentLyricIndex1 = -1;
+let currentLyricIndex2 = -1;
+
+const lyricsData1 = [
+    { time: 0, text: "..." },
+    { time: 5, text: "He was an old man, who lived by himself" },
+    { time: 10, text: "in a old cabin, lost to the south" },
+    { time: 15, text: "he had no happiness, no family, no wealth" },
+    { time: 20, text: "he built with his hands and, cared for his health" },
+    { time: 28, text: "rustling river, sparkling leaves, the sounds that he knew" },
+    { time: 34, text: "whistling birds, howling wind, the chittering wolves" },
+    { time: 40, text: "the fungus grew from things he knew, the cracks of breaking wood" },
+    { time: 46, text: "his empty flask, his broken ax, his coats of wool and fur" },
+    { time: 55, text: "as the skies darkened, frost grew on earth" },
+    { time: 60, text: "he knelt at the table, his wick slowly burnt" },
+    { time: 65, text: "he raised both his hands and, curled into fists" },
+    { time: 70, text: "struck at the daylight, the moments that he missed" },
+    { time: 75, text: "the food that he savored, the people he'd kissed" },
+    { time: 82, text: "one day he could feel, no more through the pain" },
+    { time: 88, text: "fell onto worn carpet, and started to sing" },
+    { time: 95, text: "rustling river, sparkling leaves, the sounds he knew" },
+    { time: 101, text: "whistling birds, howling wind, the chittering wolves" },
+    { time: 107, text: "the fungus grew from things he knew, the cracks of breaking wood" },
+    { time: 113, text: "his empty flask, his broken ax, his coats of wool and fur" }
+];
+
+const lyricsData2 = [
+    { time: 0, text: "..." },
+    { time: 5, text: "[ Steel & Ash ]" },
+    { time: 10, text: "..." }
+];
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return mins + ':' + secs.toString().padStart(2, '0');
+}
+
+function getCurrentLyricIndex(time, lyricsData) {
+    for (let i = lyricsData.length - 1; i >= 0; i--) {
+        if (time >= lyricsData[i].time) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function updateLyrics(audio, lyricsData, lyricsDisplay, currentIndexRef) {
+    const time = audio.currentTime;
+    const newIndex = getCurrentLyricIndex(time, lyricsData);
     
-    <main>
-        <!-- Motion Section -->
-        <div class="section motion-section">
-            <figure class="gif-container parallax-shallow">
-                <img src="WoolFur-Canvas-ezgif.com-resize.gif" alt="Wool & Fur Animation" loading="lazy">
-            </figure>
-        
-        <figure class="video-container">
-            <iframe src="https://www.youtube.com/embed/iN3Lr3CLIcU" 
-                    title="Wool & Fur - Music Video" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
-        </figure>
-    </div>
+    if (newIndex < 0) {
+        const timeToFirst = Math.ceil(lyricsData[1].time - time);
+        lyricsDisplay.textContent = '[ lyrics in ' + timeToFirst + 's... ]';
+        return -1;
+    } else if (newIndex !== currentIndexRef) {
+        lyricsDisplay.textContent = lyricsData[newIndex].text;
+        return newIndex;
+    }
+    return currentIndexRef;
+}
+
+function toggleAudio(audioId, nowPlayingId) {
+    const audio = document.getElementById(audioId);
+    const nowPlaying = document.getElementById(nowPlayingId);
     
-    <!-- Fragments Section -->
-    <div class="section">
-        <!-- Key Lyric Excerpt -->
-        <blockquote style="margin: 30px 0; padding: 20px; border-left: 2px solid var(--color-secondary); background: rgba(244, 240, 230, 0.03);">
-            <p style="font-family: 'Vulf Mono', monospace; font-style: italic; font-size: 1.1em; color: var(--color-paper); margin: 0; line-height: 1.8;">
-                "The fungus grew from things he knew<br>
-                the cracks of breaking wood<br>
-                his empty flask, his broken ax<br>
-                his coats of wool and fur"
-            </p>
-        </blockquote>
-    </div>
+    // Pause the other audio
+    if (audioId === 'audio1' && !audio2.paused) {
+        audio2.pause();
+        nowPlaying2.hidden = true;
+    } else if (audioId === 'audio2' && !audio1.paused) {
+        audio1.pause();
+        nowPlaying1.hidden = true;
+    }
     
-        <!-- Newsletter Section -->
-        <div class="newsletter">
-            <h3>email list</h3>
-            <p style="font-family: 'Vulf Mono', 'Courier New', monospace; font-size: 0.9em; margin-bottom: 20px; color: var(--color-paper);">
-                new songs, shows, and occasional field notes
-            </p>
-            <form action="https://buttondown.com/api/emails/embed-subscribe/iamdavehawkins"
-                  method="post"
-                  target="popupwindow"
-                  onsubmit="window.open('https://newsletter.iamdavehawkins.com', 'popupwindow')"
-                  class="newsletter-form">
-                <input type="email" name="email" id="bd-email" placeholder="your@email.com" required />
-                <input type="submit" value="SUBSCRIBE" />
-            </form>
-        </div>
-    </main>
-    
-    <footer>
-        &copy; <script>document.write(new Date().getFullYear());</script> Dave Hawkins | 
-        <a href="https://links.iamdavehawkins.com">links.iamdavehawkins.com</a>
-    </footer>
+    if (audio.paused) {
+        audio.play();
+        nowPlaying.hidden = false;
+    } else {
+        audio.pause();
+    }
+}
+
+audio1.addEventListener('play', function() {
+    nowPlaying1.hidden = false;
+    if (!audio2.paused) {
+        audio2.pause();
+        nowPlaying2.hidden = true;
+    }
+});
+
+audio2.addEventListener('play', function() {
+    nowPlaying2.hidden = false;
+    if (!audio1.paused) {
+        audio1.pause();
+        nowPlaying1.hidden = true;
+    }
+});
+
+audio1.addEventListener('timeupdate', function() {
+    currentTimeEl1.textContent = formatTime(audio1.currentTime);
+    if (audio1.duration) {
+        totalTimeEl1.textContent = formatTime(audio1.duration);
+    }
+    currentLyricIndex1 = updateLyrics(audio1, lyricsData1, lyricsDisplay1, currentLyricIndex1);
+});
+
+audio2.addEventListener('timeupdate', function() {
+    currentTimeEl2.textContent = formatTime(audio2.currentTime);
+    if (audio2.duration) {
+        totalTimeEl2.textContent = formatTime(audio2.duration);
+    }
+    currentLyricIndex2 = updateLyrics(audio2, lyricsData2, lyricsDisplay2, currentLyricIndex2);
+});
+
+audio1.addEventListener('ended', function() {
+    nowPlaying1.hidden = true;
+    currentLyricIndex1 = -1;
+    lyricsDisplay1.textContent = '';
+});
+
+audio2.addEventListener('ended', function() {
+    nowPlaying2.hidden = true;
+    currentLyricIndex2 = -1;
+    lyricsDisplay2.textContent = '';
+});
+</script>
+
 </body>
 </html>
